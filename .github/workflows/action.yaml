@@ -34,15 +34,23 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: SSH and Execute Command
-        uses: appleboy/ssh-action@v1.1.0
+     
+      - name: Deploy to remote server
+        uses: appleboy/ssh-action@v1.0.3
         with:
-            host: ${{ secrets.HOST }}
-            username: ${{ secrets.USERNAME }}
-            key: ${{ secrets.SSHKEY }}
-            script: |
-              cd /home
-              ls -ltr
-          
-      
+          host: 192.168.1.109
+          username: itsbijaya
+          port: 22
+          key: ${{ secrets.SSHKEY }}
+          script: |
+            # Pull the Docker image
+            docker pull itsbijaya/real-hr:latest
 
+            # Run the Docker container
+            docker run -d -p 8085:80 --name real-hr itsbijaya/real-hr:latest
+          timeout: 5m
+          debug: true
+
+      - name: Test SSH connectivity
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSHKEY }}  itsbijaya@192.168.1.109 'echo "SSH connection successful"' || exit 1
