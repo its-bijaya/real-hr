@@ -36,13 +36,13 @@ jobs:
 
       - name: SSH and Execute Command
         uses: appleboy/ssh-action@v1.1.0
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSHKEY }}
-          script: |
-            cd /home
-            ls -ltr
+          with:
+            host: ${{ secrets.HOST }}
+            username: ${{ secrets.USERNAME }}
+            key: ${{ secrets.SSHKEY }}
+            script: |
+              cd /home
+              ls -ltr
           
       
 
