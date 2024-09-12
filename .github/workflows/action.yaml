@@ -42,5 +42,6 @@ jobs:
           username: itsbijaya
           passphrase: ${{ secrets.PASSPHRASE }}
           privateKey: ${{ secrets.SSHKEY}}
+          timeout: 2m
       
 
