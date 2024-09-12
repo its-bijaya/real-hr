@@ -46,15 +46,13 @@ jobs:
             IdentityFile ~/.ssh/staging.key
             StrictHostKeyChecking no
           END
-        env:
-          SSH_USER: ${{ secrets.USERNAME}}
-          SSH_KEY: ${{ secrets.SSHKEY}}
+          env:
+          SSH_USER: ${{ secrets.USERNAME }}
+          SSH_KEY: ${{ secrets.SSHKEY }}
           SSH_HOST: ${{ secrets.HOST }}
 
-      - name: Stop the server
-        run: ssh staging 'cd /home && git fetch && ls -ltr'
-
-
+      - name: Stop the server and fetch updates
+        run: ssh staging 'cd /home && ls -ltr'
           
       
 
