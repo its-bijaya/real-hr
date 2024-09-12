@@ -35,13 +35,25 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
      
-      - name: SSH My Action
-        uses: GPTED/SSH-My-Action@0.1
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
         with:
-          HOST: ${{ secrets.HOST }}
-          PORT: ${{ secrets.PORT }}
-          USER: ${{ secrets.USERNAME }}
-          PRIVATE_KEY: ${{ secrets.SSHKEY }}
-          CMD: docker pull itsbijaya/real-hr:latest
+          key: ${{ secrets.SSH_KEY }}  # The private SSH key stored in GitHub Secrets
+          name: id_rsa # optional
+          known_hosts: ${{ secrets.KNOWN_HOSTS }} # Store the known_hosts in GitHub Secrets to avoid SSH host verification issues
+          config: ${{ secrets.CONFIG }} # SSH config if needed
+          if_key_exists: fail
+
+      - name: Rsync over SSH
+        run: rsync -r ./foo/ user@remote:/bar/ # Replace 'foo' and 'bar' with your paths
+
+      - name: Execute remote SSH commands
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}  # Remote server IP or hostname
+          username: ${{ secrets.USERNAME }} # Remote server username
+          key: ${{ secrets.SSHKEY }} # Private SSH key for authentication
+          port: ${{ secrets.PORT }} # SSH port (default is 22)
+          script: whoami
       
 
