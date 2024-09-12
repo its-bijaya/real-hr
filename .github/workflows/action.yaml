@@ -38,7 +38,7 @@ jobs:
       - name: Deploy to remote server
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: 192.168.1.99
+          host: 192.168.1.109
           username: itsbijaya
           port: 22
           key: ${{ secrets.SSHKEY }}
@@ -53,4 +53,4 @@ jobs:
 
       - name: Test SSH connectivity
         run: |
-          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSHKEY }}  itsbijaya@192.168.1.99 'echo "SSH connection successful"' || exit 1
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSHKEY }}  itsbijaya@192.168.1.109 'echo "SSH connection successful"' || exit 1
