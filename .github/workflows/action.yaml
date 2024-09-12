@@ -41,7 +41,7 @@ jobs:
           username: ${{ secrets.USERNAME }} # Remote server username
           password: ${{ secrets.PASSWORD }}
           #key: ${{ secrets.SSHKEY }} # Private SSH key for authentication
-          port: ${{ secrets.PORT }} # SSH port (default is 22)
+          port: ${{ secrets.PORT }} 
           script: whoami
       
 
