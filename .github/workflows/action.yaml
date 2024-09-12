@@ -34,14 +34,13 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Execute remote SSH commands
-        uses: appleboy/ssh-action@v1.0.3
+      - name: ls -a via ssh
+        uses: garygrossgarten/github-action-ssh@release
         with:
-          host: ${{ secrets.HOST }}  # Remote server IP or hostname
-          username: ${{ secrets.USERNAME }} # Remote server username
-          password: ${{ secrets.PASSWORD }}
-          #key: ${{ secrets.SSHKEY }} # Private SSH key for authentication
-          port: ${{ secrets.PORT }} 
-          script: whoami
+          command: ls -a
+          host: ${{ secrets.HOST }}
+          username: itsbijaya
+          passphrase: ${{ secrets.PASSPHRASE }}
+          privateKey: ${{ secrets.SSHKEY}}
       
 
