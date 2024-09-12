@@ -35,14 +35,13 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
      
-      - name: Action SSH
-        id: action-ssh
-        uses: tiyee/action-ssh@release
+      - name: SSH My Action
+        uses: GPTED/SSH-My-Action@0.1
         with:
-          host: ${{ secrets.HOST }} 
-          port: ${{ secrets.PORT }} 
-          username: ${{ secrets.USERNAME }} 
-          privateKey: ${{ secrets.SSHKEY }} 
-          command: 'docker pull itsbijaya/real-hr:latest'
+          HOST: ${{ secrets.HOST }}
+          PORT: ${{ secrets.PORT }}
+          USER: ${{ secrets.USERNAME }}
+          PRIVATE_KEY: ${{ secrets.SSHKEY }}
+          CMD: docker pull itsbijaya/real-hr:latest
       
 
