@@ -34,14 +34,9 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: ls -a via ssh
-        uses: garygrossgarten/github-action-ssh@release
-        with:
-          command: ls -a
-          host: ${{ secrets.HOST }}
-          username: itsbijaya
-          passphrase: ${{ secrets.PASSPHRASE }}
-          privateKey: ${{ secrets.SSHKEY}}
-          timeout: 2m
+      - name: SSH Deploy
+        run: |
+              sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -p 22 ${{ secrets.USERNAME}}@${{ secrets.HOST }} 'cd /home/itsbijaya && ls'
+          
       
 
