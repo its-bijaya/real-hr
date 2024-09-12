@@ -36,7 +36,7 @@ jobs:
 
       - name: SSH Deploy
         run: |
-              sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -p 22 ${{ secrets.USERNAME}}@${{ secrets.HOST }} 'cd /home/itsbijaya && ls'
+              sshpass -p 2458 ssh -o StrictHostKeyChecking=no -p 22 itsbijaya@192.168.1.109 'cd /home/itsbijaya && ls'
           
       
 
