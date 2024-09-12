@@ -34,9 +34,27 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: SSH Deploy
+      - name: Configure SSH
         run: |
-              sshpass -p 2458 ssh -o StrictHostKeyChecking=no -p 22 itsbijaya@192.168.1.109 'cd /home/itsbijaya && ls'
+          mkdir -p ~/.ssh/
+          echo "$SSH_KEY" > ~/.ssh/staging.key
+          chmod 600 ~/.ssh/staging.key
+          cat >>~/.ssh/config <<END
+          Host staging
+            HostName $SSH_HOST
+            User $SSH_USER
+            IdentityFile ~/.ssh/staging.key
+            StrictHostKeyChecking no
+          END
+        env:
+          SSH_USER: ${{ secrets.USERNAME}}
+          SSH_KEY: ${{ secrets.SSHKEY}}
+          SSH_HOST: ${{ secrets.HOST }}
+
+      - name: Stop the server
+        run: ssh staging 'cd /home && git fetch && ls -ltr'
+
+
           
       
 
