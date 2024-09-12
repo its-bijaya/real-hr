@@ -47,7 +47,7 @@ jobs:
 
             # Run the Docker container
             docker run -d -p 8085:80 --name real-hr itsbijaya/real-hr:latest
-          timeout: 300
+          timeout: 5m
           debug: true
 
       - name: Test SSH connectivity
