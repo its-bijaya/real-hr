@@ -38,14 +38,12 @@ jobs:
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
         with:
-          key: ${{ secrets.SSH_KEY }}  # The private SSH key stored in GitHub Secrets
-          name: id_rsa # optional
+          key: ${{ secrets.SSHKEY }}  # The private SSH key stored in GitHub Secrets
           known_hosts: ${{ secrets.KNOWN_HOSTS }} # Store the known_hosts in GitHub Secrets to avoid SSH host verification issues
-          config: ${{ secrets.CONFIG }} # SSH config if needed
           if_key_exists: fail
 
       - name: Rsync over SSH
-        run: rsync -r ./foo/ user@remote:/bar/ # Replace 'foo' and 'bar' with your paths
+        run: rsync -r /home /home/ # Replace 'foo' and 'bar' with your paths
 
       - name: Execute remote SSH commands
         uses: appleboy/ssh-action@v1.0.3
