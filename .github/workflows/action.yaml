@@ -34,13 +34,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Verify SSH connectivity
-        run: |
-          echo "Checking if the server is reachable on port 22..."
-          nc -zv ${{ secrets.HOST }} 22 || exit 1
-          echo "Testing SSH connection..."
-          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSHKEY }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'echo "SSH connection successful"' || exit 1
-
+     
       - name: Deploy to remote server
         uses: appleboy/ssh-action@v1.0.3
         with:
