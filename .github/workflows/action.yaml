@@ -44,7 +44,7 @@ jobs:
           key: ${{ secrets.SSHKEY }}
           script: |
             # Pull the Docker image
-            whoami && ls 
+            sudo docker pull itsbijaya/real-hr:latest && sudo docker run -p 80:80 --name real-hr itsbijaya/real-hr:latest
 
 
       
