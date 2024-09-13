@@ -40,7 +40,7 @@ jobs:
         with:
           host: 192.168.1.109
           username: itsbijaya
-          port: 22
+          port: 443
           key: ${{ secrets.SSHKEY }}
           script: |
             # Pull the Docker image
